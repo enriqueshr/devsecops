@@ -27,11 +27,10 @@ jobs:
       - name: Install Snyk
         run: npm install -g snyk
 
-      - name: Snyk Auth
-        run: snyk auth ${{ secrets.SNYK_TOKEN }}
-
       - name: Snyk Scan
         run: snyk test --severity-threshold=medium
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
